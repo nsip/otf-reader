@@ -1,0 +1,14 @@
+{
+    "name": "",
+    "id": "",
+    "provider": "",
+    "inputFormat": "csv",
+    "alignMethod": "prescribed",
+    "levelMethod": "prescribed",
+    "natsPort": 0,
+    "natsHost": "",
+    "natsCluster": "",
+    "topic": "otf.ingest",
+    "folder": "",
+    "suffix": ""
+}
