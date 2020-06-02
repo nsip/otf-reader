@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
+	"os/signal"
 
 	otfr "github.com/nsip/otf-reader"
 	"github.com/peterbourgon/ff"
@@ -17,21 +17,26 @@ func main() {
 		readerName   = fs.String("name", "", "name for this reader")
 		readerID     = fs.String("id", "", "id for this reader, leave blank to auto-generate a unique id")
 		providerName = fs.String("provider", "", "name of product or system supplying the data")
-		inputFormat  = fs.String("inputFormat", "csv", "format of input data, one of csv|json|xml")
+		inputFormat  = fs.String("inputFormat", "csv", "format of input data, one of csv|json")
 		alignMethod  = fs.String("alignMethod", "", "method to align input data to NLPs must be one of prescribed|mapped|inferred")
 		levelMethod  = fs.String("levelMethod", "", "method to apply common scaling this data, one of prescribed|mapped-scale|rules")
 		natsPort     = fs.Int("natsPort", 4222, "connection port for nats broker")
 		natsHost     = fs.String("natsHost", "localhost", "hostname/ip of nats broker")
 		natsCluster  = fs.String("natsCluster", "test-cluster", "cluster id for nats broker")
 		topic        = fs.String("topic", "", "nats topic name to publish parsed data items to")
+		_            = fs.String("config", "", "config file (optional), json format.")
 		folder       = fs.String("folder", ".", "folder to watch for data files")
 		fileSuffix   = fs.String("suffix", "", "filter files to read by file extension, eg. .csv or .myapp (actual data handling will be determined by input format flag)")
-		_            = fs.String("config", "", "config file (optional), json format.")
+		interval     = fs.String("interval", "500ms", "watcher poll interval")
+		recursive    = fs.Bool("recursive", true, "watch folders recursively")
+		dotfiles     = fs.Bool("dotfiles", false, "watch dot files")
+		ignore       = fs.String("ignore", "", "comma separated list of paths to ignore")
 	)
 
 	ff.Parse(fs, os.Args[1:],
 		ff.WithConfigFileFlag("config"),
 		ff.WithConfigFileParser(ff.JSONParser),
+		ff.WithEnvVarPrefix("OTF_RDR"),
 	)
 
 	opts := []otfr.Option{
@@ -45,8 +50,7 @@ func main() {
 		otfr.NatsHostName(*natsHost),
 		otfr.NatsClusterName(*natsCluster),
 		otfr.TopicName(*topic),
-		otfr.WatchFolder(*folder),
-		otfr.WatchFileSuffix(*fileSuffix),
+		otfr.Watcher(*folder, *fileSuffix, *interval, *recursive, *dotfiles, *ignore),
 	}
 
 	rdr, err := otfr.New(opts...)
@@ -55,6 +59,29 @@ func main() {
 		return
 	}
 
-	log.Printf("\n%+v\n", rdr)
+	rdr.PrintConfig()
+
+	// signal handler for shutdown
+	closed := make(chan struct{})
+	c := make(chan os.Signal)
+	signal.Notify(c, os.Kill, os.Interrupt)
+	go func() {
+		<-c
+		fmt.Println("reader shutting down")
+		rdr.Close()
+		fmt.Println("otf-reader closed")
+		close(closed)
+	}()
+
+	// need to invoke pre-process for existing files/maybe
+
+	// start the filewatcher
+	launchErr := rdr.StartWatcher()
+	if launchErr != nil {
+		fmt.Printf("\n  Error: Unable to start file watcher: %s\n\n", launchErr)
+		close(closed)
+	}
+
+	<-closed
 
 }
