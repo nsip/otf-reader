@@ -2,10 +2,13 @@ package otfreader
 
 import (
 	"os"
+	"regexp"
 	"strings"
+	"time"
 
 	"github.com/nsip/otf-reader/internal/util"
 	"github.com/pkg/errors"
+	"github.com/radovskyb/watcher"
 )
 
 type Option func(*OTFReader) error
@@ -81,11 +84,11 @@ func InputFormat(iformat string) Option {
 
 		format := strings.ToLower(iformat)
 		switch format {
-		case "csv", "json", "xml":
+		case "csv", "json":
 			rdr.inputFormat = format
 			return nil
 		}
-		return errors.New("otf-reader InputFormat " + iformat + " not supported (must be one of csv|json|xml)")
+		return errors.New("otf-reader InputFormat " + iformat + " not supported (must be one of csv|json)")
 	}
 }
 
@@ -200,35 +203,69 @@ func TopicName(tName string) Option {
 }
 
 //
-// specify the file-system folder to watch for new data
+// configure the internal file watcher
 //
-func WatchFolder(folderPath string) Option {
+func Watcher(folder string, fileSuffix string, interval string, recursive bool, dotfiles bool, ignore string) Option {
 	return func(rdr *OTFReader) error {
-		if len(folderPath) == 0 {
-			folderPath = "."
-		}
-		if _, err := os.Stat(folderPath); os.IsNotExist(err) {
-			// path/to/whatever does not exist
-			return errors.Wrap(err, "WatchFolder option error:")
-		}
-		rdr.watchFolder = folderPath
-		return nil
-	}
-}
 
-//
-// exxtension of the files to watch.
-// can be used if mixed files in folder but only one type
-// e.g. .csv files need to be parsed.
-//
-func WatchFileSuffix(suffix string) Option {
-	return func(rdr *OTFReader) error {
-		if len(suffix) > 0 {
-			if !strings.HasPrefix(suffix, ".") { // add separator dot if not supplied
-				suffix = "." + suffix
+		rdr.watcher = watcher.New()
+		rdr.watcher.IgnoreHiddenFiles(!dotfiles)
+		rdr.dotfiles = dotfiles
+
+		// If no files/folders were specified, watch the current directory.
+		if len(folder) == 0 {
+			var osErr error
+			folder, osErr = os.Getwd()
+			if osErr != nil {
+				return errors.Wrap(osErr, "no watch folder specified, and cannot determine current working diectory")
 			}
-			rdr.watchFileSuffix = suffix
 		}
+		rdr.watchFolder = folder
+
+		// Get any of the paths to ignore.
+		ignoredPaths := strings.Split(ignore, ",")
+		for _, path := range ignoredPaths {
+			trimmed := strings.TrimSpace(path)
+			if trimmed == "" {
+				continue
+			}
+
+			err := rdr.watcher.Ignore(trimmed)
+			if err != nil {
+				return errors.Wrap(err, "unable to add ignore folder "+trimmed)
+			}
+		}
+		rdr.ignore = ignore
+
+		// Only files that match the regular expression for file suffix during file listings
+		// will be watched.
+		if len(fileSuffix) > 0 {
+			trimSuffix := strings.Trim(fileSuffix, ".")
+			r := regexp.MustCompile("([^\\s]+(\\.(?i)(" + trimSuffix + "))$)")
+			rdr.watcher.AddFilterHook(watcher.RegexFilterHook(r, false))
+		}
+		rdr.watchFileSuffix = fileSuffix
+
+		// Add the watch folder specified.
+		if recursive {
+			if err := rdr.watcher.AddRecursive(folder); err != nil {
+				return errors.Wrap(err, "unable to add watch folder "+folder+" recursively")
+			}
+		} else {
+			if err := rdr.watcher.Add(folder); err != nil {
+				return errors.Wrap(err, "unable to add watch folder "+folder)
+			}
+		}
+		rdr.recursive = recursive
+
+		// Parse the interval string into a time.Duration.
+		parsedInterval, err := time.ParseDuration(interval)
+		if err != nil {
+			return errors.Wrap(err, "unable to parse watcher interval as duration")
+		}
+		rdr.interval = parsedInterval
+
 		return nil
 	}
+
 }

@@ -1,14 +1,14 @@
 {
     "name": "",
     "id": "",
-    "provider": "",
+    "provider": "MathsPathway",
     "inputFormat": "csv",
-    "alignMethod": "prescribed",
+    "alignMethod": "mapped",
     "levelMethod": "prescribed",
     "natsPort": 0,
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "",
-    "suffix": ""
+    "folder": "./test_data/maths-pathway",
+    "suffix": ".csv"
 }
