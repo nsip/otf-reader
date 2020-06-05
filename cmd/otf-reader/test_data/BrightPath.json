@@ -1,0 +1,1321 @@
+[
+{
+    "school":
+    {
+        "name": "WA Demo School",
+        "identifiers": [
+        {
+            "identifier": "1Demo",
+            "provider": "Research School ID"
+        }],
+        "sector": "Research Sector"
+    },
+    "name": "Test project for NSIP",
+    "date_administered": "2020-06-02",
+    "termoccurrence": null,
+    "description": "Test data for NSIP",
+    "years": ["Year 1", "Year 2"],
+    "scale": "Narrative Scale",
+    "assessment_type": "SINGLE_ASSESSOR",
+    "allocations": [
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Kandra",
+                    "last_name": "Bosarge",
+                    "identifiers": [
+                    {
+                        "identifier": "187",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2013-11-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 350,
+        "notes": "",
+        "parent_comments": "<p>Teacher Comments</p>",
+        "student_comments": "<ul>\n<li>Individual teacher comment</li>\n</ul>",
+        "descriptor": "<ul>\n<li>Individual teacher comment - what you did well.</li>\n</ul>",
+        "teaching_points": "<ul>\n<li>Individual teacher comment -&nbsp;start to</li>\n</ul>",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Stacie",
+                    "last_name": "Casavant",
+                    "identifiers": [
+                    {
+                        "identifier": "233",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-05-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 360,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Hue",
+                    "last_name": "Curto",
+                    "identifiers": [
+                    {
+                        "identifier": "197",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2014-12-03",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 300,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "Nicola Fortes Test Data",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Nicola",
+                    "last_name": "Fortes",
+                    "identifiers": [
+                    {
+                        "identifier": "212",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-02-01",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 320,
+        "notes": "<p>Assessment Notes</p>",
+        "parent_comments": "",
+        "student_comments": "<p>teacher comments</p>",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Refugia",
+                    "last_name": "Alcock",
+                    "identifiers": [
+                    {
+                        "identifier": "15",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-08-25",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 400,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "Sibyl Benton - Test data",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Sibyl",
+                    "last_name": "Benton",
+                    "identifiers": [
+                    {
+                        "identifier": "6",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-04-26",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 330,
+        "notes": "<p>Assessment notes</p>",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Suzanna",
+                    "last_name": "Bigby",
+                    "identifiers": [
+                    {
+                        "identifier": "10",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-08-16",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 420,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Armando",
+                    "last_name": "Cheung",
+                    "identifiers": [
+                    {
+                        "identifier": "18",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2012-10-16",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 300,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    }]
+},
+{
+    "school":
+    {
+        "name": "WA Demo School",
+        "identifiers": [
+        {
+            "identifier": "1Demo",
+            "provider": "Research School ID"
+        }],
+        "sector": "Research Sector"
+    },
+    "name": "Test research project for NSIP",
+    "date_administered": "2020-06-03",
+    "termoccurrence": null,
+    "description": "Test research project for NSIP",
+    "years": ["Year 1", "Year 2"],
+    "scale": "Persuasive Scale",
+    "assessment_type": "SINGLE_ASSESSOR",
+    "allocations": [
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Kandra",
+                    "last_name": "Bosarge",
+                    "identifiers": [
+                    {
+                        "identifier": "187",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2013-11-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 280,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Kandra",
+                    "last_name": "Bosarge",
+                    "identifiers": [
+                    {
+                        "identifier": "187",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2013-11-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 220,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Stacie",
+                    "last_name": "Casavant",
+                    "identifiers": [
+                    {
+                        "identifier": "233",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-05-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 180,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Stacie",
+                    "last_name": "Casavant",
+                    "identifiers": [
+                    {
+                        "identifier": "233",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-05-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 90,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Hue",
+                    "last_name": "Curto",
+                    "identifiers": [
+                    {
+                        "identifier": "197",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2014-12-03",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 200,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Hue",
+                    "last_name": "Curto",
+                    "identifiers": [
+                    {
+                        "identifier": "197",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2014-12-03",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 90,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Nicola",
+                    "last_name": "Fortes",
+                    "identifiers": [
+                    {
+                        "identifier": "212",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-02-01",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 180,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Nicola",
+                    "last_name": "Fortes",
+                    "identifiers": [
+                    {
+                        "identifier": "212",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2014-02-01",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 110,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Amanda",
+                    "last_name": "Coan",
+                    "identifiers": [
+                    {
+                        "identifier": "13",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-02-09",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 90,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Amanda",
+                    "last_name": "Coan",
+                    "identifiers": [
+                    {
+                        "identifier": "13",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-02-09",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 185,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Carita",
+                    "last_name": "Dearth",
+                    "identifiers": [
+                    {
+                        "identifier": "5",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-03-26",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": null,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Carita",
+                    "last_name": "Dearth",
+                    "identifiers": [
+                    {
+                        "identifier": "5",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2012-03-26",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": 170,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Tory",
+                    "last_name": "Deboer",
+                    "identifiers": [
+                    {
+                        "identifier": "16",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2012-08-22",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": null,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": false,
+            "work": "Test Student Work",
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Tory",
+                    "last_name": "Deboer",
+                    "identifiers": [
+                    {
+                        "identifier": "16",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2012-08-22",
+                    "atsi": false,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": null,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [
+                {
+                    "identifier": "000000007",
+                    "provider": "Research Person ID"
+                }],
+                "user":
+                {
+                    "email": "sabinehoffmann83@web.de"
+                }
+            },
+            "research": true
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Lien",
+                    "last_name": "Doherty",
+                    "identifiers": [
+                    {
+                        "identifier": "2",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2012-06-24",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": null,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    },
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Lien",
+                    "last_name": "Doherty",
+                    "identifiers": [
+                    {
+                        "identifier": "2",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 1,
+                    "dob": "2012-06-24",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 4
+                }
+            }
+        },
+        "score": null,
+        "notes": "",
+        "parent_comments": "",
+        "student_comments": "",
+        "descriptor": "",
+        "teaching_points": "",
+        "additional_schools": []
+    }]
+}]
