@@ -67,13 +67,13 @@ func main() {
 	signal.Notify(c, os.Kill, os.Interrupt)
 	go func() {
 		<-c
-		fmt.Println("reader shutting down")
+		fmt.Println("\nreader shutting down")
 		rdr.Close()
 		fmt.Println("otf-reader closed")
 		close(closed)
 	}()
 
-	// need to invoke pre-process for existing files/maybe
+	// [need to invoke pre-process for existing files/maybe]
 
 	// start the filewatcher
 	launchErr := rdr.StartWatcher()

@@ -1,11 +1,18 @@
 package otfreader
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"log"
+	"os"
+	"strings"
 	"time"
 
+	"github.com/cdutwhu/n3-util/n3csv"
+	stan "github.com/nats-io/stan.go"
 	"github.com/nsip/otf-reader/internal/util"
+	"github.com/pkg/errors"
 	"github.com/radovskyb/watcher"
 )
 
@@ -27,6 +34,7 @@ type OTFReader struct {
 	dotfiles        bool
 	ignore          string
 	watcher         *watcher.Watcher
+	sc              stan.Conn
 }
 
 //
@@ -57,38 +65,54 @@ func (rdr *OTFReader) Close() {
 func (rdr *OTFReader) StartWatcher() error {
 
 	// get a nats connection
-	sc, err := util.NewConnection(rdr.natsHost, rdr.natsCluster, rdr.name, rdr.natsPort)
-	if err != nil {
-		return err
+	var connErr error
+	rdr.sc, connErr = util.NewConnection(rdr.natsHost, rdr.natsCluster, rdr.name, rdr.natsPort)
+	if connErr != nil {
+		return connErr
 	}
-	// fmt.Printf("\n\nnats connection:\n\n%+v\n\n", sc)
-	_ = sc
 
 	// main watcher event processing loop
 	go func() {
+
+		// set up worker pool semaphore, to prevent hitting file-handle limits
+		type token struct{}
+		var poolSize = 10 // max files to process concurrently
+		sem := make(chan token, poolSize)
+
 		for {
-			timer := time.NewTimer(5 * time.Second)
-			copying := false
 			select {
 			case event := <-rdr.watcher.Event:
 				if event.Op == watcher.Remove {
-					fmt.Println("Delete was fired")
+					fmt.Printf("\n\tfile:%s operation:%s %s\n", event.Name(), event.Op, time.Now())
 				} else if (event.Op == watcher.Write || event.Op == watcher.Create) && event.IsDir() == false {
-					fmt.Println(event)
-					copying = true
+					fmt.Printf("\n\tfile:%s", event.Path)
+					fmt.Printf("\n\toperation:%s modified: %s\n", event.Op, event.ModTime())
+					sem <- token{}             // acquire pool slot
+					go func(fileName string) { // spawn publishing worker
+						err := rdr.publishFile(fileName)
+						if err != nil {
+							log.Println("error publishing file: ", fileName, err)
+						}
+						<-sem // release slot back to pool
+						// timer block
+						// benthos/jq in to detach allocations
+					}(event.Path)
 				}
 			case err := <-rdr.watcher.Error:
-				log.Fatalln(err)
+				fmt.Println("\tFile-watcher error occurred: ", err)
+				fmt.Println("File-watching suspended, recommend reader restart.")
+				return
 			case <-rdr.watcher.Closed:
 				return
-			case <-timer.C:
-				if copying {
-					fmt.Println("Done with Copy")
-					copying = false
-				}
 			}
-			timer.Stop()
 		}
+		// wait for all workers to complete
+		// blocks until buffered channel can be filled to limit -
+		// only possible once all workers have released back to pool
+		for n := poolSize; n > 0; n-- {
+			sem <- token{}
+		}
+
 	}()
 
 	// Start the watching process.
@@ -99,17 +123,59 @@ func (rdr *OTFReader) StartWatcher() error {
 	return nil
 }
 
-// filepath | nats
-func publishCSV() {
+func (rdr *OTFReader) publishFile(fileName string) error {
+	fmt.Println("\n\tPUBLISHING:", fileName)
 
-	// remember async publish
+	var inputFile io.Reader
+	inputFile, err := os.Open(fileName)
+	if err != nil {
+		return err
+	}
 
-}
+	if rdr.inputFormat == "csv" {
+		// if csv then first convert to json
+		json, _ := n3csv.Reader2JSON(inputFile, "")
+		fmt.Printf("\nconverted json:\n\n%s\n\n", json)
+		// converter returns file as json string so re-wrap in reader
+		inputFile = strings.NewReader(json)
+	}
 
-// filepath | nats
-func publishJSON() {
+	// now read json file as stream, publish each object to nats
+	d := json.NewDecoder(inputFile)
 
-	// remember async publish
+	// read opening brace "["
+	_, err = d.Token()
+	if err != nil {
+		return errors.Wrap(err, "unexpected token; json file should be json array")
+	}
+
+	// for speed we're using async publishing in nats, which needs
+	// a callback handler for any publishing errors, which is set up here
+	ackHandler := func(ackedNuid string, err error) {
+		if err != nil {
+			log.Printf("Warning: error publishing msg id %s: %v\n", ackedNuid, err.Error())
+		} else {
+			// log.Printf("Received ack for msg id %s\n", ackedNuid)
+		}
+	}
+
+	// read json objects one by one
+	for d.More() {
+		var m json.RawMessage
+		err := d.Decode(&m)
+		if err != nil {
+			return errors.Wrap(err, "unable to decode json object.")
+		}
+		fmt.Printf("\n%s\n", m)
+		// publish to nats
+		nuid, err := rdr.sc.PublishAsync(rdr.publishTopic, m, ackHandler)
+		if err != nil {
+			log.Printf("Error publishing msg %s: %v\n", nuid, err.Error())
+			return err
+		}
+	}
+
+	return nil
 }
 
 //

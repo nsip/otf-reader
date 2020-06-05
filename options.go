@@ -83,9 +83,10 @@ func InputFormat(iformat string) Option {
 		}
 
 		format := strings.ToLower(iformat)
-		switch format {
+		trimFormat := strings.Trim(format, ".") // remove any ecess . chars
+		switch trimFormat {
 		case "csv", "json":
-			rdr.inputFormat = format
+			rdr.inputFormat = trimFormat
 			return nil
 		}
 		return errors.New("otf-reader InputFormat " + iformat + " not supported (must be one of csv|json)")
@@ -209,6 +210,8 @@ func Watcher(folder string, fileSuffix string, interval string, recursive bool, 
 	return func(rdr *OTFReader) error {
 
 		rdr.watcher = watcher.New()
+
+		// dot file handling
 		rdr.watcher.IgnoreHiddenFiles(!dotfiles)
 		rdr.dotfiles = dotfiles
 
