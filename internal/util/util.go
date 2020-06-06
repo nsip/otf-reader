@@ -8,6 +8,7 @@ import (
 	"math/big"
 	"os"
 	"regexp"
+	"time"
 
 	"github.com/nats-io/nuid"
 	stan "github.com/nats-io/stan.go"
@@ -90,4 +91,14 @@ func NewConnection(host, cluster, client string, port int) (stan.Conn, error) {
 	}
 
 	return sc, nil
+}
+
+//
+// small utility function embedded in major ops
+// to print a performance indicator.
+//
+func TimeTrack(start time.Time, name string) {
+	elapsed := time.Since(start)
+	log.Printf("%s took %s", name, elapsed.Truncate(time.Millisecond).String())
+
 }

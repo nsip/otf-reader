@@ -14,6 +14,7 @@ import (
 	"github.com/nsip/otf-reader/internal/util"
 	"github.com/pkg/errors"
 	"github.com/radovskyb/watcher"
+	"github.com/tidwall/sjson"
 )
 
 type OTFReader struct {
@@ -55,6 +56,7 @@ func New(options ...Option) (*OTFReader, error) {
 // ensure graceful shutdown of file-watcher
 //
 func (rdr *OTFReader) Close() {
+	rdr.sc.Close()
 	rdr.watcher.Close()
 }
 
@@ -83,10 +85,9 @@ func (rdr *OTFReader) StartWatcher() error {
 			select {
 			case event := <-rdr.watcher.Event:
 				if event.Op == watcher.Remove {
-					fmt.Printf("\n\tfile:%s operation:%s %s\n", event.Name(), event.Op, time.Now())
+					fmt.Printf("\nfile: %s\noperation: %s\nmodified: %s\n", event.Path, event.Op, time.Now())
 				} else if (event.Op == watcher.Write || event.Op == watcher.Create) && event.IsDir() == false {
-					fmt.Printf("\n\tfile:%s", event.Path)
-					fmt.Printf("\n\toperation:%s modified: %s\n", event.Op, event.ModTime())
+					fmt.Printf("\nfile: %s\noperation: %s\nmodified: %s\n", event.Path, event.Op, event.ModTime())
 					sem <- token{}             // acquire pool slot
 					go func(fileName string) { // spawn publishing worker
 						err := rdr.publishFile(fileName)
@@ -94,8 +95,6 @@ func (rdr *OTFReader) StartWatcher() error {
 							log.Println("error publishing file: ", fileName, err)
 						}
 						<-sem // release slot back to pool
-						// timer block
-						// benthos/jq in to detach allocations
 					}(event.Path)
 				}
 			case err := <-rdr.watcher.Error:
@@ -123,8 +122,15 @@ func (rdr *OTFReader) StartWatcher() error {
 	return nil
 }
 
+//
+// does the work of reading the input file, converting input to json
+// then streaming otf format json records to nats.
+// otf records contain original data and meta-data blocks.
+//
 func (rdr *OTFReader) publishFile(fileName string) error {
-	fmt.Println("\n\tPUBLISHING:", fileName)
+
+	fmt.Println("PUBLISHING:", fileName)
+	defer util.TimeTrack(time.Now(), "publishFile()")
 
 	var inputFile io.Reader
 	inputFile, err := os.Open(fileName)
@@ -135,7 +141,7 @@ func (rdr *OTFReader) publishFile(fileName string) error {
 	if rdr.inputFormat == "csv" {
 		// if csv then first convert to json
 		json, _ := n3csv.Reader2JSON(inputFile, "")
-		fmt.Printf("\nconverted json:\n\n%s\n\n", json)
+		// fmt.Printf("\nconverted json:\n\n%s\n\n", json)
 		// converter returns file as json string so re-wrap in reader
 		inputFile = strings.NewReader(json)
 	}
@@ -160,22 +166,56 @@ func (rdr *OTFReader) publishFile(fileName string) error {
 	}
 
 	// read json objects one by one
+	objCount := 0
 	for d.More() {
 		var m json.RawMessage
 		err := d.Decode(&m)
 		if err != nil {
 			return errors.Wrap(err, "unable to decode json object.")
 		}
-		fmt.Printf("\n%s\n", m)
+		// insert the read data into the standard otf message
+		otfMsg, err := sjson.SetRawBytes([]byte(""), "original", m)
+		if err != nil {
+			return errors.Wrap(err, "cannot add original json to otf message")
+		}
+		// now add the other meta-data
+		otfMsg, err = sjson.SetRawBytes(otfMsg, "meta", rdr.metaBytes())
+		if err != nil {
+			return errors.Wrap(err, "cannot create meta-data block for otf message")
+		}
+
+		// fmt.Printf("\n-------------\n%s\n-----------\n", otfMsg)
+
 		// publish to nats
-		nuid, err := rdr.sc.PublishAsync(rdr.publishTopic, m, ackHandler)
+		nuid, err := rdr.sc.PublishAsync(rdr.publishTopic, otfMsg, ackHandler)
 		if err != nil {
 			log.Printf("Error publishing msg %s: %v\n", nuid, err.Error())
 			return err
 		}
+		objCount++
 	}
 
+	fmt.Printf("%d records published from %s\n", objCount, fileName)
 	return nil
+}
+
+//
+// constructs a json block containing values taken
+// from the reader
+//
+func (rdr *OTFReader) metaBytes() []byte {
+
+	metaString := fmt.Sprintf(`{
+	"providerName": "%s",
+	"inputFormat": "%s",
+	"alignMethod": "%s",
+	"levelMethod": "%s",
+	"readerName": "%s",
+	"readerID": "%s"
+}`, rdr.providerName, rdr.inputFormat, rdr.alignMethod, rdr.levelMethod, rdr.name, rdr.ID)
+
+	return []byte(metaString)
+
 }
 
 //
