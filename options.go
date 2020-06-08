@@ -204,6 +204,23 @@ func TopicName(tName string) Option {
 }
 
 //
+// set the number of input files that can be handled concurrently
+// set if number of filehandles on OS is a problem
+// defaults to 10
+//
+func ConcurrentFiles(n int) Option {
+	return func(rdr *OTFReader) error {
+		if n == 0 {
+			rdr.concurrentFiles = 10 // safe default
+			return nil
+		}
+		rdr.concurrentFiles = n
+		return nil
+	}
+
+}
+
+//
 // configure the internal file watcher
 //
 func Watcher(folder string, fileSuffix string, interval string, recursive bool, dotfiles bool, ignore string) Option {

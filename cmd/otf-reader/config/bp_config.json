@@ -10,5 +10,5 @@
     "natsCluster": "",
     "topic": "otf.ingest",
     "folder": "./in/brightpath",
-    "suffix": ".json"
+    "suffix": ".brightpath"
 }

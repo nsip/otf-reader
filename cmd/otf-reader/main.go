@@ -31,6 +31,7 @@ func main() {
 		recursive    = fs.Bool("recursive", true, "watch folders recursively")
 		dotfiles     = fs.Bool("dotfiles", false, "watch dot files")
 		ignore       = fs.String("ignore", "", "comma separated list of paths to ignore")
+		concurrFiles = fs.Int("concurrFiles", 10, "pool size for concurrent file processing")
 	)
 
 	ff.Parse(fs, os.Args[1:],
@@ -51,6 +52,7 @@ func main() {
 		otfr.NatsClusterName(*natsCluster),
 		otfr.TopicName(*topic),
 		otfr.Watcher(*folder, *fileSuffix, *interval, *recursive, *dotfiles, *ignore),
+		otfr.ConcurrentFiles(*concurrFiles),
 	}
 
 	rdr, err := otfr.New(opts...)
