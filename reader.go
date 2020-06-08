@@ -36,6 +36,7 @@ type OTFReader struct {
 	ignore          string
 	watcher         *watcher.Watcher
 	sc              stan.Conn
+	concurrentFiles int
 }
 
 //
@@ -258,6 +259,7 @@ func (rdr *OTFReader) printWatcherConfig() {
 	fmt.Println("\twatch dot files:\t", rdr.dotfiles)
 	fmt.Println("\tignore files:\t\t", rdr.ignore)
 	fmt.Println("\twatch folder:\t\t", rdr.watchFolder)
+	fmt.Println("\tmax concurrent files:\t\t", rdr.concurrentFiles)
 	fmt.Println("\tfiles being watched:")
 	for path, f := range rdr.watcher.WatchedFiles() {
 		// fmt.Printf("\t   %s: %s\n", path, f.Name())
