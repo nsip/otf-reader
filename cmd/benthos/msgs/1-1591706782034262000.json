@@ -1,0 +1,87 @@
+{
+    "meta":
+    {
+        "providerName": "BrightPath",
+        "inputFormat": "json",
+        "alignMethod": "mapped",
+        "levelMethod": "prescribed",
+        "readerName": "yqWa7N",
+        "readerID": "27L25FGqxGFnr5NxkyFUyR"
+    },
+    "original":
+    {
+        "assessor_participation":
+        {
+            "person":
+            {
+                "first_name": "Sabine",
+                "last_name": "Hoffmann",
+                "identifiers": [],
+                "user":
+                {
+                    "email": "sabinehoffmann835@gmail.com"
+                }
+            },
+            "research": false
+        },
+        "student_participation":
+        {
+            "name": "",
+            "hard_copy": true,
+            "work": null,
+            "enrolment":
+            {
+                "student":
+                {
+                    "first_name": "Kandra",
+                    "last_name": "Bosarge",
+                    "identifiers": [
+                    {
+                        "identifier": "187",
+                        "provider": "Research Student ID"
+                    }],
+                    "gender": 2,
+                    "dob": "2013-11-21",
+                    "atsi": true,
+                    "lbote": null,
+                    "eald": null
+                },
+                "cohort":
+                {
+                    "calendar_year": 2020,
+                    "academic_year": 3
+                }
+            }
+        },
+        "score": 350,
+        "notes": "",
+        "parent_comments": "<p>Teacher Comments</p>",
+        "student_comments": "<ul>\n<li>Individual teacher comment</li>\n</ul>",
+        "descriptor": "<ul>\n<li>Individual teacher comment - what you did well.</li>\n</ul>",
+        "teaching_points": "<ul>\n<li>Individual teacher comment -&nbsp;start to</li>\n</ul>",
+        "additional_schools": [],
+        "school":
+        {
+            "name": "WA Demo School",
+            "identifiers": [
+            {
+                "identifier": "1Demo",
+                "provider": "Research School ID"
+            }],
+            "sector": "Research Sector"
+        },
+        "test":
+        {
+            "name": "Test project for NSIP",
+            "date_administered": "2020-06-02",
+            "termoccurrence": null,
+            "description": "Test data for NSIP",
+            "years": [
+                "Year 1",
+                "Year 2"
+            ],
+            "scale": "Narrative Scale",
+            "assessment_type": "SINGLE_ASSESSOR"
+        }
+    }
+}
