@@ -10,7 +10,7 @@ Whenever files are created or updated within the folder they are read and transf
 
 Typical input files would be a csv or json file containing multiple assessment results for a cohort of students.
 
-The reader creates a standard json record for each result read from the file, and adds meta-data about to assist the further processing of the records as they traverse the OTF PDM workflow. For example the otf-reader will add a 'providerName:' field to the created record that identifies the system that created the original record - this can be used to control conditional processing later in the workflow if necessary.
+The reader creates a standard json record for each result read from the file, and adds meta-data to assist the further processing of the records as they traverse the OTF PDM workflow. For example the otf-reader will add a 'providerName:' field to the created record that identifies the system that created the original record - this can be used to control conditional processing later in the workflow if necessary.
 
 The otf-reader can monitor trees of folders recursively, and can be configured to consume only specific file types.
 
@@ -50,12 +50,13 @@ to display all configuration options
 These are the confiuration options:
 
 |Option name|Type|Required|Default|Description|
+|---|---|---|---|---|
 |readerName|string|no|auto-generated|A unique name for this reader, added to messages to identify origin in workflows/audits. If not supplied will default to a short hashid style id|
 |readerID|guid (string)|no|auto-generated|Assigns a unique id to this reader, agin used for tracing/auditing. If not supplied will default to a nuid style guid|
 |providerName|string|yes||Name of the system which created the original input data|
 |inputFormat|string|yes|csv|The internal format of the input data file, currently mst be one of csv or json|
-|alignMethod|string|yes||Method to be applied later in workflow to align data from this provider to the NLPs, cmust be one of prescribed|mapped|inferred)|
-|levelMethod|string|yes||Method to be applied later in workflow to scale data from this provider to the NLP scaling, cmust be one of prescribed|mapped-scale|rules)|
+|alignMethod|string|yes||Method to be applied later in workflow to align data from this provider to the NLPs, (must be one of prescribed, mapped, inferred)|
+|levelMethod|string|yes||Method to be applied later in workflow to scale data from this provider to the NLP scaling, (must be one of prescribed, mapped-scale, rules)|
 |natsPort|int|yes|4222|The port of the nats server that will receive records|
 |natsHost|string|yes|localhost|The hostname/address of the nats server|
 |natsCluster|string|yes|test-cluster|nats streaming cluster name|
