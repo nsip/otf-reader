@@ -17,7 +17,7 @@ import (
 	"github.com/tidwall/sjson"
 )
 
-type OTFReader struct {
+type OtfReader struct {
 	name            string
 	ID              string
 	providerName    string
@@ -42,9 +42,9 @@ type OTFReader struct {
 //
 // create a new reader
 //
-func New(options ...Option) (*OTFReader, error) {
+func New(options ...Option) (*OtfReader, error) {
 
-	rdr := OTFReader{}
+	rdr := OtfReader{}
 
 	if err := rdr.setOptions(options...); err != nil {
 		return nil, err
@@ -56,7 +56,7 @@ func New(options ...Option) (*OTFReader, error) {
 //
 // ensure graceful shutdown of file-watcher
 //
-func (rdr *OTFReader) Close() {
+func (rdr *OtfReader) Close() {
 	rdr.sc.Close()
 	rdr.watcher.Close()
 }
@@ -65,7 +65,7 @@ func (rdr *OTFReader) Close() {
 // starts the reader monitoring the filesystem to
 // harvest data files.
 //
-func (rdr *OTFReader) StartWatcher() error {
+func (rdr *OtfReader) StartWatcher() error {
 
 	// get a nats connection
 	var connErr error
@@ -128,7 +128,7 @@ func (rdr *OTFReader) StartWatcher() error {
 // then streaming otf format json records to nats.
 // otf records contain original data and meta-data blocks.
 //
-func (rdr *OTFReader) publishFile(fileName string) error {
+func (rdr *OtfReader) publishFile(fileName string) error {
 
 	fmt.Println("PUBLISHING:", fileName)
 	defer util.TimeTrack(time.Now(), "publishFile()")
@@ -204,7 +204,7 @@ func (rdr *OTFReader) publishFile(fileName string) error {
 // constructs a json block containing values taken
 // from the reader
 //
-func (rdr *OTFReader) metaBytes() []byte {
+func (rdr *OtfReader) metaBytes() []byte {
 
 	metaString := fmt.Sprintf(`{
 	"providerName": "%s",
@@ -222,7 +222,7 @@ func (rdr *OTFReader) metaBytes() []byte {
 //
 // print the current config
 //
-func (rdr *OTFReader) PrintConfig() {
+func (rdr *OtfReader) PrintConfig() {
 
 	fmt.Println("\n\tOTF-Reader Configuration")
 	fmt.Println("\t------------------------\n")
@@ -234,26 +234,26 @@ func (rdr *OTFReader) PrintConfig() {
 
 }
 
-func (rdr *OTFReader) printID() {
+func (rdr *OtfReader) printID() {
 	fmt.Println("\treader name:\t\t", rdr.name)
 	fmt.Println("\treader ID:\t\t", rdr.ID)
 }
 
-func (rdr *OTFReader) printDataConfig() {
+func (rdr *OtfReader) printDataConfig() {
 	fmt.Println("\tdata provider:\t\t", rdr.providerName)
 	fmt.Println("\tinput format:\t\t", rdr.inputFormat)
 	fmt.Println("\talign method:\t\t", rdr.alignMethod)
 	fmt.Println("\tlevel method:\t\t", rdr.levelMethod)
 }
 
-func (rdr *OTFReader) printNatsConfig() {
+func (rdr *OtfReader) printNatsConfig() {
 	fmt.Println("\tnats port:\t\t", rdr.natsPort)
 	fmt.Println("\tnats host:\t\t", rdr.natsHost)
 	fmt.Println("\tnats cluster-id:\t", rdr.natsCluster)
 	fmt.Println("\tnats topic:\t\t", rdr.publishTopic)
 }
 
-func (rdr *OTFReader) printWatcherConfig() {
+func (rdr *OtfReader) printWatcherConfig() {
 	fmt.Println("\twatch file suffix:\t", rdr.watchFileSuffix)
 	fmt.Println("\twatch poll interval:\t", rdr.interval)
 	fmt.Println("\twatch dot files:\t", rdr.dotfiles)
