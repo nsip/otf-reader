@@ -36,7 +36,6 @@ func Name(name string) Option {
 			rdr.name = name
 			return nil
 		}
-		// needs hashid
 		rdr.name = util.GenerateName()
 		return nil
 	}

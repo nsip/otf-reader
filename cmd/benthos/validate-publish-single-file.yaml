@@ -1,5 +1,5 @@
 http:
-  address: 0.0.0.0:4195
+  address: "${BENTHOS_HOST}"
   read_timeout: 5s
   root_path: /benthos
   debug_endpoints: false
@@ -15,7 +15,7 @@ input:
       count: 1
       period: ""
       processors: []
-    client_id: benthos_client
+    client_id: otf_reader_benthos_client_1
     cluster_id: test-cluster
     durable_name: #benthos_offset
     max_inflight: 1024
