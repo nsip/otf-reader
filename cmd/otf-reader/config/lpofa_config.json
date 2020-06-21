@@ -3,12 +3,13 @@
     "id": "",
     "provider": "LPOFA",
     "inputFormat": "json",
-    "alignMethod": "mapped",
+    "alignMethod": "inferred",
     "levelMethod": "prescribed",
     "natsPort": 0,
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
     "folder": "./in/lpofa",
-    "suffix": ".json"
+    "suffix": ".json",
+    "capability": "literacy"
 }

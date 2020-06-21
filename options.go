@@ -115,6 +115,22 @@ func LevelMethod(lmethod string) Option {
 	}
 }
 
+func Capability(genCap string) Option {
+	return func(rdr *OtfReader) error {
+		if genCap == "" {
+			return errors.New("otf-reader General Capability cannot be empty.")
+		}
+
+		capb := strings.ToLower(genCap)
+		switch capb {
+		case "literacy", "numeracy":
+			rdr.genCapability = capb
+			return nil
+		}
+		return errors.New("otf-reader General Capability " + genCap + " not supported (must be one of literacy|numeracy)")
+	}
+}
+
 //
 // select the alignment method appropriate data from this vendor
 // can be one of
