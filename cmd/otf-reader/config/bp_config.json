@@ -10,5 +10,6 @@
     "natsCluster": "",
     "topic": "otf.ingest",
     "folder": "./in/brightpath",
-    "suffix": ".brightpath"
+    "suffix": ".brightpath",
+    "capability": "literacy"
 }

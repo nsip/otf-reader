@@ -24,6 +24,7 @@ type OtfReader struct {
 	inputFormat     string
 	levelMethod     string
 	alignMethod     string
+	genCapability   string
 	natsPort        int
 	natsHost        string
 	natsCluster     string
@@ -79,8 +80,7 @@ func (rdr *OtfReader) StartWatcher() error {
 
 		// set up worker pool semaphore, to prevent hitting file-handle limits
 		type token struct{}
-		var poolSize = 10 // max files to process concurrently
-		sem := make(chan token, poolSize)
+		sem := make(chan token, rdr.concurrentFiles)
 
 		for {
 			select {
@@ -109,7 +109,7 @@ func (rdr *OtfReader) StartWatcher() error {
 		// wait for all workers to complete
 		// blocks until buffered channel can be filled to limit -
 		// only possible once all workers have released back to pool
-		for n := poolSize; n > 0; n-- {
+		for n := rdr.concurrentFiles; n > 0; n-- {
 			sem <- token{}
 		}
 
@@ -212,8 +212,10 @@ func (rdr *OtfReader) metaBytes() []byte {
 	"alignMethod": "%s",
 	"levelMethod": "%s",
 	"readerName": "%s",
-	"readerID": "%s"
-}`, rdr.providerName, rdr.inputFormat, rdr.alignMethod, rdr.levelMethod, rdr.name, rdr.ID)
+	"readerID": "%s",
+	"capability": "%s"
+}`, rdr.providerName, rdr.inputFormat, rdr.alignMethod,
+		rdr.levelMethod, rdr.name, rdr.ID, rdr.genCapability)
 
 	return []byte(metaString)
 
@@ -244,6 +246,7 @@ func (rdr *OtfReader) printDataConfig() {
 	fmt.Println("\tinput format:\t\t", rdr.inputFormat)
 	fmt.Println("\talign method:\t\t", rdr.alignMethod)
 	fmt.Println("\tlevel method:\t\t", rdr.levelMethod)
+	fmt.Println("\tgen-capability:\t\t", rdr.genCapability)
 }
 
 func (rdr *OtfReader) printNatsConfig() {
