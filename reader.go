@@ -141,8 +141,10 @@ func (rdr *OtfReader) publishFile(fileName string) error {
 
 	if rdr.inputFormat == "csv" {
 		// if csv then first convert to json
-		json, _ := n3csv.Reader2JSON(inputFile, "")
-		// fmt.Printf("\nconverted json:\n\n%s\n\n", json)
+		json, _, err := n3csv.Reader2JSON(inputFile, "")
+		if err != nil {
+			return errors.Wrap(err, "error converting csv file to json")
+		}
 		// converter returns file as json string so re-wrap in reader
 		inputFile = strings.NewReader(json)
 	}
