@@ -57,6 +57,7 @@ These are the confiuration options:
 |inputFormat|string|yes|csv|The internal format of the input data file, currently mst be one of csv or json|
 |alignMethod|string|yes||Method to be applied later in workflow to align data from this provider to the NLPs, (must be one of prescribed, mapped, inferred)|
 |levelMethod|string|yes||Method to be applied later in workflow to scale data from this provider to the NLP scaling, (must be one of prescribed, mapped-scale, rules)|
+|capability|string|yes||NLP General Capability (area) these results should be associated with (currently (Alpha) must be one of: literacy or numeracy) 
 |natsPort|int|yes|4222|The port of the nats server that will receive records|
 |natsHost|string|yes|localhost|The hostname/address of the nats server|
 |natsCluster|string|yes|test-cluster|nats streaming cluster name|
