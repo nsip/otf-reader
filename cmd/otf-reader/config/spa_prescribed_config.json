@@ -1,0 +1,15 @@
+{
+    "name": "",
+    "id": "",
+    "provider": "SPA",
+    "inputFormat": "csv",
+    "alignMethod": "prescribed",
+    "levelMethod": "prescribed",
+    "natsPort": 0,
+    "natsHost": "",
+    "natsCluster": "",
+    "topic": "otf.ingest",
+    "folder": "./in/spa",
+    "suffix": ".csv",
+    "capability": "literacy"
+}

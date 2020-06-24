@@ -50,6 +50,7 @@ to display all configuration options
 These are the confiuration options:
 
 |Option name|Type|Required|Default|Description|
+|---|---|---|---|---|
 |readerName|string|no|auto-generated|A unique name for this reader, added to messages to identify origin in workflows/audits. If not supplied will default to a short hashid style id|
 |readerID|guid (string)|no|auto-generated|Assigns a unique id to this reader, agin used for tracing/auditing. If not supplied will default to a nuid style guid|
 |providerName|string|yes||Name of the system which created the original input data|
