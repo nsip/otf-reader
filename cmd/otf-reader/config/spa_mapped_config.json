@@ -10,6 +10,6 @@
     "natsCluster": "",
     "topic": "otf.ingest",
     "folder": "./in/spa",
-    "suffix": ".csv",
+    "suffix": "mapped.csv",
     "capability": "literacy"
 }
