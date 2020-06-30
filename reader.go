@@ -182,7 +182,7 @@ func (rdr *OtfReader) publishFile(fileName string) error {
 			return errors.Wrap(err, "cannot add original json to otf message")
 		}
 		// now add the other meta-data
-		otfMsg, err = sjson.SetRawBytes(otfMsg, "meta", rdr.metaBytes())
+		otfMsg, err = sjson.SetRawBytes(otfMsg, "meta", rdr.metaBytes(fileName))
 		if err != nil {
 			return errors.Wrap(err, "cannot create meta-data block for otf message")
 		}
@@ -204,9 +204,9 @@ func (rdr *OtfReader) publishFile(fileName string) error {
 
 //
 // constructs a json block containing values taken
-// from the reader
+// from the reader, and the input file
 //
-func (rdr *OtfReader) metaBytes() []byte {
+func (rdr *OtfReader) metaBytes(fileName string) []byte {
 
 	metaString := fmt.Sprintf(`{
 	"providerName": "%s",
@@ -215,9 +215,14 @@ func (rdr *OtfReader) metaBytes() []byte {
 	"levelMethod": "%s",
 	"readerName": "%s",
 	"readerID": "%s",
-	"capability": "%s"
+	"capability": "%s",
+	"sourceFileName":"%s",
+	"messageID": "%s",
+	"readTimestampUTC":"%s"
 }`, rdr.providerName, rdr.inputFormat, rdr.alignMethod,
-		rdr.levelMethod, rdr.name, rdr.ID, rdr.genCapability)
+		rdr.levelMethod, rdr.name, rdr.ID, rdr.genCapability,
+		fileName, util.GenerateID(),
+		time.Now().UTC().Format(time.RFC3339))
 
 	return []byte(metaString)
 
