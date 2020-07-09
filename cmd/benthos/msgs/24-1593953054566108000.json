@@ -1,0 +1,21 @@
+{"original":{
+    "providerName": "BrightPath",
+    "providerNodeId": "PNI0000003",
+    "itemReference": "Narrative Scale 350",
+    "externalReference": "Narrative Scale 350",
+    "itemReferenceVersion": "",
+    "itemVersion": "",
+    "itemDescriptor": "Story includes an orientation, a complication and may include a resolution",
+    "contentDescriptor": ""
+  },"meta":{
+	"providerName": "nsip",
+	"inputFormat": "csv",
+	"alignMethod": "mapped",
+	"levelMethod": "mapped-scale",
+	"readerName": "ldrlG9",
+	"readerID": "BrpxMyGv8KNhaNQXQzcnq2",
+	"capability": "literacy",
+	"sourceFileName":"/Users/mattfarmer/go/src/github.com/nsip/otf-reader/cmd/otf-reader/in/maps/align/providerItems.csv",
+	"messageID": "BrpxMyGv8KNhaNQXQzcocI",
+	"readTimestampUTC":"2020-07-05T12:44:14Z"
+}}
