@@ -1,0 +1,15 @@
+{
+    "name": "",
+    "id": "",
+    "provider": "nsip",
+    "inputFormat": "csv",
+    "alignMethod": "mapped",
+    "levelMethod": "mapped-scale",
+    "natsPort": 0,
+    "natsHost": "",
+    "natsCluster": "",
+    "topic": "otf.maps.align",
+    "folder": "./in/maps",
+    "suffix": ".csv",
+    "capability": "literacy"
+}
