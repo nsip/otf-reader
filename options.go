@@ -107,11 +107,11 @@ func LevelMethod(lmethod string) Option {
 
 		method := strings.ToLower(lmethod)
 		switch method {
-		case "prescribed", "mapped-scale", "rules":
+		case "prescribed", "mapped", "rules":
 			rdr.levelMethod = method
 			return nil
 		}
-		return errors.New("otf-reader LevelMethod " + lmethod + " not supported (must be one of prescribed|mapped-scale|rules)")
+		return errors.New("otf-reader LevelMethod " + lmethod + " not supported (must be one of prescribed|mapped|rules)")
 	}
 }
 

@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "./in/spa",
+    "folder": "/Users/mattfarmer/otfdata/in/spa",
     "suffix": ".prescribed.csv",
     "capability": "literacy"
 }

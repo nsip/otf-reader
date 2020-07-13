@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "./in/maths-pathway",
+    "folder": "/Users/mattfarmer/otfdata/in/maths-pathway",
     "suffix": ".csv",
     "capability": "numeracy"
 }

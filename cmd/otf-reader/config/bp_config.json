@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "./in/brightpath",
+    "folder": "/Users/mattfarmer/otfdata/in/brightpath",
     "suffix": ".brightpath",
     "capability": "literacy"
 }
