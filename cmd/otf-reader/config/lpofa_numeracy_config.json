@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "/Users/mattfarmer/otfdata/in/lpofa",
+    "folder": "",
     "suffix": ".numeracy.json",
     "capability": "numeracy"
 }

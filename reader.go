@@ -105,6 +105,7 @@ func (rdr *OtfReader) StartWatcher() error {
 			case <-rdr.watcher.Closed:
 				return
 			}
+
 		}
 		// wait for all workers to complete
 		// blocks until buffered channel can be filled to limit -

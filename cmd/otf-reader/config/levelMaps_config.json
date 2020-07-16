@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.maps.level",
-    "folder": "/Users/mattfarmer/otfdata/in/maps/level",
+    "folder": "",
     "suffix": ".csv",
     "capability": "literacy"
 }
