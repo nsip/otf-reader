@@ -4,12 +4,12 @@
     "provider": "BrightPath",
     "inputFormat": "json",
     "alignMethod": "mapped",
-    "levelMethod": "prescribed",
+    "levelMethod": "mapped",
     "natsPort": 0,
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "./in/brightpath",
+    "folder": "",
     "suffix": ".brightpath",
     "capability": "literacy"
 }

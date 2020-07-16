@@ -9,7 +9,7 @@
     "natsHost": "",
     "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "./in/lpofa",
+    "folder": "",
     "suffix": ".literacy.json",
     "capability": "literacy"
 }

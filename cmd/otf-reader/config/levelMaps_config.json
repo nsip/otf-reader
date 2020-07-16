@@ -1,15 +1,15 @@
 {
     "name": "",
     "id": "",
-    "provider": "MathsPathway",
+    "provider": "nsip",
     "inputFormat": "csv",
     "alignMethod": "mapped",
-    "levelMethod": "prescribed",
+    "levelMethod": "mapped",
     "natsPort": 0,
     "natsHost": "",
     "natsCluster": "",
-    "topic": "otf.ingest",
+    "topic": "otf.maps.level",
     "folder": "",
     "suffix": ".csv",
-    "capability": "numeracy"
+    "capability": "literacy"
 }
