@@ -33,4 +33,4 @@ COPY --from=builder /go/bin/server /go/bin/server
 # NOTE - make sure it is the last build that still copies the files
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 WORKDIR /go/bin
-CMD ["/go/bin/server"]
+ENTRYPOINT ["/go/bin/server", "--folder=/data", "--config=/config.json"]
