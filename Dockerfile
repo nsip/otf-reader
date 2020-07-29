@@ -2,7 +2,7 @@
 # INSTRUCTIONS
 ############################
 # BUILD: docker build -t nsip/otf-reader .
-# TEST: docker run -it -v ./test/data:/data -v ./test/config.json:/config.json nsip/otf-reader .
+# TEST: docker run -it -v $PWD/test/data:/data -v $PWD/test/config.json:/config.json nsip/otf-reader .
 # RUN: docker run -d nsip/otf-reader
 #
 ###########################
