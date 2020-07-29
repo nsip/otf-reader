@@ -1,0 +1,38 @@
+version: '3.7'
+
+# network - default composer has a single network they all are part of
+
+services:
+
+      # XXX reader needs to have multiple:
+      #     brightpath Data
+      #     for lpofa (xapi) literacy data
+      #     for lpofa (xapi) numeracy data
+      #     for maths pathway data
+      #     for sreams (SPA) mapped data
+      #     for sreams (SPA) prescribed data
+      #     for alignment service data maps
+      #     for the levelling service data maps
+      # ./otf-reader --folder=$PDM_ROOT/in/brightpath --config=./config/bp_config.json
+      # Methods:
+      # - Docker image
+
+  otf-reader:
+    image: nsip/oft-reader:dev
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    environment:
+        - OTF_READER_SRVC_PORT=3000
+        - OTF_READER_SRVC_NIASHOST=n3-web
+        - OTF_READER_SRVC_NIASPORT=3000
+        - OTF_READER_SRVC_NIASTOKEN=xxx
+        - OTF_READER_SRVC_TCHOST=xxx
+        - OTF_READER_SRVC_TCPORT=xxx
+    volumes:
+      - ./data/otfdata/in/spa:/data
+      - ./reader/config/spa_mapped_config.json:/config.json
+
+    #tmux new-window -d -t '=otfpdm' -n rdr_spa_mapped -c ~/github/otf-reader/cmd/otf-reader
+    #t  mux send-keys -t '=otfpdm:=rdr_spa_mapped' './otf-reader --folder=$PDM_ROOT/in/spa --config=./config/spa_mapped_config.json' Enter
+
+  natsstreaming:
+    image: nats-streaming
