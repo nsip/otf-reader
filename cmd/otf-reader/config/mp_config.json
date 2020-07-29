@@ -1,15 +1,9 @@
 {
-    "name": "",
-    "id": "",
     "provider": "MathsPathway",
     "inputFormat": "csv",
     "alignMethod": "mapped",
     "levelMethod": "prescribed",
-    "natsPort": 0,
-    "natsHost": "",
-    "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "",
     "suffix": ".csv",
     "capability": "numeracy"
 }

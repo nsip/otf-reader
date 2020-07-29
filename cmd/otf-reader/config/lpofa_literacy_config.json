@@ -1,15 +1,9 @@
 {
-    "name": "",
-    "id": "",
     "provider": "LPOFA",
     "inputFormat": "json",
     "alignMethod": "inferred",
     "levelMethod": "prescribed",
-    "natsPort": 0,
-    "natsHost": "",
-    "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "",
     "suffix": ".literacy.json",
     "capability": "literacy"
 }
