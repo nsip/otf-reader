@@ -36,10 +36,12 @@ func main() {
 	)
 
 	ff.Parse(fs, os.Args[1:],
+		ff.WithEnvVarNoPrefix(),
 		ff.WithConfigFileFlag("config"),
 		ff.WithConfigFileParser(ff.JSONParser),
-		ff.WithEnvVarPrefix("OTF_RDR"),
 	)
+
+	fmt.Println("Test Topic=%s\n", *topic)
 
 	opts := []otfr.Option{
 		otfr.Name(*readerName),

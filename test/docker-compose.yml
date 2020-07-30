@@ -1,0 +1,31 @@
+version: '3.7'
+
+# network - default composer has a single network they all are part of
+
+services:
+
+  otf-reader-rdr-spa-mapped:
+    image: nsip/oft-reader
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    environment:
+        - NATSHOST=natsstreaming
+    volumes:
+      - ./data/otfdata/in/spa:/data
+      - ../cmd/otf-reader/config/spa_mapped_config.json:/config.json
+    depends_on:
+      - natsstreaming
+
+  otf-reader-lpofa-literacy:
+    image: nsip/oft-reader
+    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    environment:
+        - NATSHOST=natsstreaming
+    volumes:
+      - ./data/otfdata/in/spa:/data
+      - ../cmd/otf-reader/config/lpofa_literacy_config.json:/config.json
+    depends_on:
+      - natsstreaming
+
+
+  natsstreaming:
+    image: nats-streaming

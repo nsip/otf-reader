@@ -1,15 +1,9 @@
 {
-    "name": "",
-    "id": "",
     "provider": "BrightPath",
     "inputFormat": "json",
     "alignMethod": "mapped",
     "levelMethod": "mapped",
-    "natsPort": 0,
-    "natsHost": "",
-    "natsCluster": "",
     "topic": "otf.ingest",
-    "folder": "",
     "suffix": ".brightpath",
     "capability": "literacy"
 }

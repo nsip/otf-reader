@@ -78,6 +78,7 @@ func NewConnection(host, cluster, client string, port int) (stan.Conn, error) {
 
 	// Send PINGs every 10 seconds, and fail after 5 PINGs without any response.
 	sc, err := stan.Connect(cluster, client,
+		// nats.ReconnectWait(10*time.Second),
 		stan.NatsURL(fmt.Sprintf("nats://%s:%d", host, port)),
 		stan.Pings(10, 5),
 		stan.SetConnectionLostHandler(func(_ stan.Conn, reason error) {
