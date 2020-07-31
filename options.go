@@ -177,6 +177,7 @@ func NatsHostName(hostName string) Option {
 	return func(rdr *OtfReader) error {
 		if hostName != "" {
 			rdr.natsHost = hostName
+			return nil
 		}
 		rdr.natsHost = "localhost" //nats default
 		return nil

@@ -8,24 +8,29 @@ services:
     image: nsip/oft-reader
     build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
     environment:
-        - NATSHOST=natsstreaming
+      - NATSHOST=natsstreaming
     volumes:
       - ./data/otfdata/in/spa:/data
       - ../cmd/otf-reader/config/spa_mapped_config.json:/config.json
     depends_on:
-      - natsstreaming
+       - natsstreaming
+    deploy:
+      restart_policy:
+        delay: 5s
 
   otf-reader-lpofa-literacy:
     image: nsip/oft-reader
     build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
     environment:
-        - NATSHOST=natsstreaming
+      - NATSHOST=natsstreaming
     volumes:
       - ./data/otfdata/in/spa:/data
       - ../cmd/otf-reader/config/lpofa_literacy_config.json:/config.json
     depends_on:
       - natsstreaming
-
+    deploy:
+      restart_policy:
+        delay: 5s
 
   natsstreaming:
     image: nats-streaming
