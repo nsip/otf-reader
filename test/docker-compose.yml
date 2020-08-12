@@ -5,8 +5,8 @@ version: '3.7'
 services:
 
   otf-reader-rdr-spa-mapped:
-    image: nsip/oft-reader
-    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    image: nsip/otf-reader
+    # build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
     environment:
       - NATSHOST=natsstreaming
     volumes:
@@ -19,8 +19,8 @@ services:
         delay: 5s
 
   otf-reader-lpofa-literacy:
-    image: nsip/oft-reader
-    build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
+    image: nsip/otf-reader
+    # build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
     environment:
       - NATSHOST=natsstreaming
     volumes:

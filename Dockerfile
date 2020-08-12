@@ -34,5 +34,5 @@ COPY --from=builder /go/bin/server /go/bin/server
 # NOTE - make sure it is the last build that still copies the files
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 WORKDIR /go/bin
-#ENTRYPOINT ["/go/bin/server", "--folder=/data", "--config=/config.json"]
-ENTRYPOINT  "sh", "-c", "echo 'sleep 30'; sleep 30; /go/bin/server --folder=/data --config=/config.json"]
+ENTRYPOINT ["/go/bin/server", "--folder=/data", "--config=/config.json"]
+#ENTRYPOINT  "sh", "-c", "echo 'sleep 30'; sleep 30; /go/bin/server --folder=/data --config=/config.json"]
