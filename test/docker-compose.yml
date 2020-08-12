@@ -39,7 +39,7 @@ services:
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
-      - ../cmd/otf-reader/config/spa_perscribed_config.json:/config.json
+      - ../cmd/otf-reader/config/spa_prescribed_config.json:/config.json
     depends_on:
        - natsstreaming
 
