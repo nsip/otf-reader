@@ -2,35 +2,82 @@ version: '3.7'
 
 # network - default composer has a single network they all are part of
 
-services:
+x-common-variables: &common-variables
+  NATSHOST: natsstreaming
 
-  otf-reader-rdr-spa-mapped:
-    image: nsip/otf-reader
-    # build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
-    environment:
-      - NATSHOST=natsstreaming
-    volumes:
-      - ./data/otfdata/in/spa:/data
-      - ../cmd/otf-reader/config/spa_mapped_config.json:/config.json
-    depends_on:
-       - natsstreaming
-    deploy:
-      restart_policy:
-        delay: 5s
+services:
 
   otf-reader-lpofa-literacy:
     image: nsip/otf-reader
-    # build: https://7f4da21a1d2a8fcea4c7376f2f85a6152dfc8531@github.com/nsip/otf-reader.git#docker
-    environment:
-      - NATSHOST=natsstreaming
+    environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
       - ../cmd/otf-reader/config/lpofa_literacy_config.json:/config.json
     depends_on:
       - natsstreaming
-    deploy:
-      restart_policy:
-        delay: 5s
+
+  otf-reader-lpofa-numeracy:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/lpofa:/data
+      - ../cmd/otf-reader/config/lpofa_numeracy_config.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-maths-pathway:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/maths-pathway:/data
+      - ../cmd/otf-reader/config/mp_config.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-spa-perscribed:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/spa:/data
+      - ../cmd/otf-reader/config/spa_perscribed_config.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-alighment-service:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/align:/data
+      - ../cmd/otf-reader/config/alignMaps_config.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-levelling-service:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/level:/data
+      - ../cmd/otf-reader/config/levelMaps.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-brightpath-data:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/brightpath:/data
+      - ../cmd/otf-reader/config/bp_config.json:/config.json
+    depends_on:
+       - natsstreaming
+
+  otf-reader-rdr-spa-mapped:
+    image: nsip/otf-reader
+    environment: *common-variables
+    volumes:
+      - ./data/otfdata/in/spa:/data
+      - ../cmd/otf-reader/config/spa_mapped_config.json:/config.json
+    depends_on:
+       - natsstreaming
 
   natsstreaming:
     image: nats-streaming
