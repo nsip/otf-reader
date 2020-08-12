@@ -41,7 +41,7 @@ func main() {
 		ff.WithConfigFileParser(ff.JSONParser),
 	)
 
-	fmt.Println("Test Topic=%s\n", *topic)
+	fmt.Printf("TEST: Nats Host=%s, port=%d, Topic=%s\n", *natsHost, *natsPort, *topic)
 
 	opts := []otfr.Option{
 		otfr.Name(*readerName),
