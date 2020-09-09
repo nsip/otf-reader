@@ -24,7 +24,7 @@
 ###########################
 # STEP 0 Get them certificates
 ############################
-# (note, step 2 is using alpine now) 
+# (note, step 2 is using alpine now)
 # FROM alpine:latest as certs
 
 ############################
@@ -48,4 +48,5 @@ FROM alpine
 COPY --from=builder /build/app /app
 # NOTE - make sure it is the last build that still copies the files
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-CMD ["./app"]
+WORKDIR /
+ENTRYPOINT ["./app", "--folder=/data", "--config=/config.json"]
