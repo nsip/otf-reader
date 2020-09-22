@@ -8,7 +8,7 @@ x-common-variables: &common-variables
 services:
 
   otf-reader-lpofa-literacy:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
@@ -17,7 +17,7 @@ services:
       - natsstreaming
 
   otf-reader-lpofa-numeracy:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/lpofa:/data
@@ -26,7 +26,7 @@ services:
        - natsstreaming
 
   otf-reader-maths-pathway:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/maths-pathway:/data
@@ -35,7 +35,7 @@ services:
        - natsstreaming
 
   otf-reader-spa-perscribed:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
@@ -44,7 +44,7 @@ services:
        - natsstreaming
 
   otf-reader-alighment-service:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/align:/data
@@ -53,7 +53,7 @@ services:
        - natsstreaming
 
   otf-reader-levelling-service:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/level:/data
@@ -62,7 +62,7 @@ services:
        - natsstreaming
 
   otf-reader-brightpath-data:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/brightpath:/data
@@ -71,7 +71,7 @@ services:
        - natsstreaming
 
   otf-reader-rdr-spa-mapped:
-    image: nsip/otf-reader
+    image: nsip/otf-reader:develop
     environment: *common-variables
     volumes:
       - ./data/otfdata/in/spa:/data
