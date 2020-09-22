@@ -2,3 +2,4 @@
 cmd/otf-reader/otf-reader
 *.xcsv
 data
+*.swp
