@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/nsip/otf-reader/internal/util"
+	util "github.com/nsip/otf-util"
 	"github.com/pkg/errors"
 	"github.com/radovskyb/watcher"
 )
@@ -36,7 +36,7 @@ func Name(name string) Option {
 			rdr.name = name
 			return nil
 		}
-		rdr.name = util.GenerateName()
+		rdr.name = util.GenerateName("otf-reader")
 		return nil
 	}
 }

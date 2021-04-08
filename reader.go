@@ -11,7 +11,7 @@ import (
 
 	"github.com/cdutwhu/n3-util/n3csv"
 	stan "github.com/nats-io/stan.go"
-	"github.com/nsip/otf-reader/internal/util"
+	util "github.com/nsip/otf-util"
 	"github.com/pkg/errors"
 	"github.com/radovskyb/watcher"
 	"github.com/tidwall/sjson"
@@ -87,7 +87,7 @@ func (rdr *OtfReader) StartWatcher() error {
 			case event := <-rdr.watcher.Event:
 				if event.Op == watcher.Remove {
 					fmt.Printf("\nfile: %s\noperation: %s\nmodified: %s\n", event.Path, event.Op, time.Now())
-				} else if (event.Op == watcher.Write || event.Op == watcher.Create) && event.IsDir() == false {
+				} else if (event.Op == watcher.Write || event.Op == watcher.Create) && !event.IsDir() {
 					fmt.Printf("\nfile: %s\noperation: %s\nmodified: %s\n", event.Path, event.Op, event.ModTime())
 					sem <- token{}             // acquire pool slot
 					go func(fileName string) { // spawn publishing worker
@@ -110,9 +110,9 @@ func (rdr *OtfReader) StartWatcher() error {
 		// wait for all workers to complete
 		// blocks until buffered channel can be filled to limit -
 		// only possible once all workers have released back to pool
-		for n := rdr.concurrentFiles; n > 0; n-- {
-			sem <- token{}
-		}
+		// for n := rdr.concurrentFiles; n > 0; n-- {
+		// 	sem <- token{}
+		// }
 
 	}()
 
@@ -235,7 +235,7 @@ func (rdr *OtfReader) metaBytes(fileName string) []byte {
 func (rdr *OtfReader) PrintConfig() {
 
 	fmt.Println("\n\tOTF-Reader Configuration")
-	fmt.Println("\t------------------------\n")
+	fmt.Println("\t------------------------")
 
 	rdr.printID()
 	rdr.printDataConfig()
