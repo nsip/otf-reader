@@ -1,8 +1,10 @@
 # otf-reader
+
 The otf-reader reads assessment data in various formats from filesystem, sends into OTF progress data management workflows.
 
 ## how it works
-The otf-reader is configured to watch a file folder. 
+
+The otf-reader is configured to watch a file folder.
 
 The file folder will receive output files produced by a variety of assessment systems.
 
@@ -18,7 +20,7 @@ All configuration options can be set on the command-line using flags, via envron
 Configuration can use any or all of these methods in combination.
 For example options such as the address and hostname of the nats streaming server might best be accessed from environment variables, whilst the selection of which folder to monitor might be supplied in a json configuration file.
 
-Configuration flags are capitalised and prefixed with OTF_RDR when supplied as environment variables; so flag --natsPort on the commnad-line becomes 
+Configuration flags are capitalised and prefixed with OTF_RDR when supplied as environment variables; so flag --natsPort on the commnad-line becomes
 
 ```
 OTF_RDR_NATSPORT=4222
@@ -26,13 +28,14 @@ OTF_RDR_NATSPORT=4222
 
 when expressed as an environment variable and
 
-```
+```json
 { "natsPort":4222 }
 ```
 
 when set in a json configuration file.
 
 ## running otf-reader
+
 simply launch the otf-reader with configuration options, for example:
 ```
 ./otf-reader -config=./config/lpofa_config.json
@@ -47,7 +50,7 @@ to display all configuration options
 
 ## configuration
 
-These are the confiuration options:
+These are the configuration options:
 
 |Option name|Type|Required|Default|Description|
 |---|---|---|---|---|
@@ -62,10 +65,10 @@ These are the confiuration options:
 |natsHost|string|yes|localhost|The hostname/address of the nats server|
 |natsCluster|string|yes|test-cluster|nats streaming cluster name|
 |topic|string|yes||The name of the nats topic to publish the ingested messages to. Topics can be delimited using '.' characters. For example the provided sample configs publish to "otf.ingest"|
-|config|string|no||location of a configuraiton file in json format|
+|config|string|no||location of a configuration file in json format|
 |folder|string|yes|cwd|The folder that the reader should watch for file activity|
 |fileSuffix|string|no||Optional filter of files based on suffix, for instance if a folder contains multiple file types but only .csv files are of interest then the watcher list can be filtered by providing this option. If not provided all files in the watched folder will be read. The file suffix does not affect the inputFormat, so that files can have any extension such as .myAssessmentApp, but still be processed as csv or json files|
-|interval|string|yes|500ms|Frequecy of watcher poll interval. Should be supplied as a duriation such as 2s, 2m30s, 1h30m etc.|
+|interval|string|yes|500ms|Frequency of watcher poll interval. Should be supplied as a duration such as 2s, 2m30s, 1h30m etc.|
 |recursive|boolean|yes|true|Watches all sub-folders of the specified watcher folder for file changes, set to false will monitor the watcher folder only|
 |dotFiles|boolean|yes|false|On unix systems includes dot files in monitoring for activity|
 |ignore|string|no||Provide a comma-separated list of paths to ignore/exclude from watching|
@@ -79,12 +82,11 @@ The otf-reader needs an instance of nats-streaming-server to be running in order
 
 build the main binary from the /cmd/otf-reader folder
 
-```
+```bash
 go get github.com/nsip/otf-reader
 cd go/src/github.com/nsip/otf-reader/cmd/otf-reader
 go build
 ```
-
 
 create an input folder tree under the /cmd/otf-reader folder:
 
@@ -96,7 +98,6 @@ create an input folder tree under the /cmd/otf-reader folder:
   /spa
 ```
 
-
 to test all 4 input formats create 4 terminal sessions and then launch an istance of otf-reader in each one using the provided configs from the /cmd/otf-reader/config folder:
 
 for lpofa xapi format data:
@@ -104,7 +105,7 @@ for lpofa xapi format data:
 ./otf-reader -config=./config/lpofa_config.json
 ```
 
-for maths-pathway format data: 
+for maths-pathway format data:
 ```
 ./otf-reader -config=./config/mp_config.json
 ```
@@ -119,14 +120,14 @@ for brightpath format data:
 ./otf-reader -config=./config/bp_config.json
 ```
 
-As each reader start up it will print its configuration to the terminal and then enter the watching looop waiting for file activity.
+As each reader start up it will print its configuration to the terminal and then enter the watching loop waiting for file activity.
 
-You can now copy files from the 
+You can now copy files from the
 ```
 /cmd/otf-reader/test-data
 ```
 
-folder into the relevant folder under the cmd/otf-reader/in root you created earlier. 
+folder into the relevant folder under the cmd/otf-reader/in root you created earlier.
 
 As each file is copied, the reader will report progress in publishing the records.
 
@@ -141,22 +142,22 @@ Data is provided to the OTF PDM workflow as a stream of individual records per s
 
 CSV records are typically in this format conceptually. JSON records, however can be normalised to a greater or lesser extent.
 
-For example our sample BrightPath data needs some elements from the original file strucure such as the school information to be repeated in each record passed into the OTF. In the orginal file the school information is recorded only once for efficiency.
+For example our sample BrightPath data needs some elements from the original file structure such as the school information to be repeated in each record passed into the OTF. In the original file the school information is recorded only once for efficiency.
 
 Therefore sometimes some pre-processing of the input data is required. To achieve the desired structure in the BrighPath data a shell script is provided in the /preprocesors/brightpath folder to de-normalise the data by using the jq json processor.
 
 Running this script on the original BrightPath.json file creates a new BrightPath.json.brightpath file. This is the file that should be used in testing the brightpath reader, and the appropriate example config has been updated to look for .brightpath files rather than .json files accordingly.
 
 If the original file is read, and the brightpath otf-reader has its file suffix set back to .json, no dire consequences happen - any json content can be read by the otf-reader and will always be stored in the { "original": } member of the created otf-message.
-The diffrerence is that the original format file will be parsed as only containing 2 records (as the records are descended from the 2 schools in the file). The pre-processed version of the file produces 24 individual student records.
+The difference is that the original format file will be parsed as only containing 2 records (as the records are descended from the 2 schools in the file). The pre-processed version of the file produces 24 individual student records.
 
 ## benthos
 
 The otf-reader is designed to be very high performance. It will throw errors immediately if no nats server is available, but assuming that a nats server is available it will publish ingested records very quickly.
 
-Without a nats client however it's hard to validate that the messages have arrived and contain the expected reuslts.
+Without a nats client however it's hard to validate that the messages have arrived and contain the expected results.
 
-Given that the rest of the OTF DPM workflow is handled by benthos, testing the success of the publising with a benthos workflow config kills 2 birds with one stone...
+Given that the rest of the OTF DPM workflow is handled by benthos, testing the success of the publishing with a benthos workflow config kills 2 birds with one stone...
 
 You need to have a copy of benthos installed.
 
@@ -172,7 +173,7 @@ Once you do, you can run it with either of the configs found in
 benthos -c ./validate-publish-multi-files.yaml
 ```
 
-will start a benthos workflow that consumes the newly created otf messages from the publishing stream and writes each one as a seaparate json file
+will start a benthos workflow that consumes the newly created otf messages from the publishing stream and writes each one as a separate json file
 in the msgs sub-folder
 
 ```
@@ -187,22 +188,20 @@ each message can be inspected to validate the content.
 benthos -c ./validate-publish-single-file.yaml
 ```
 
-will start a benthos workflow that consumes the newly created otf messages from the publishing stream and writes each one as a seaparate line in a
+will start a benthos workflow that consumes the newly created otf messages from the publishing stream and writes each one as a separate line in a
 consolidated log file:
 
 ```
 /otf-reader/cmd/benthos/digest/msglog.txt
 ```
 
-
 The benthos process can also be started before the otf-readers at any time to check end-to-end latency between reading files and producing output.
 
-
-## output data (otf messsage)
+## output data (otf message)
 
 At this stage of the OTF PDM workflow, the otf message simply contains two blocks of data, a "meta:" section with the parameters provided by the otf-reader and an "original:" block containing the content of the read data in json format. Example:
 
-```
+```json
 {
     "meta":
     {
@@ -291,10 +290,3 @@ At this stage of the OTF PDM workflow, the otf message simply contains two block
     }
 }
 ```
-
-
-
-
-
-
-
