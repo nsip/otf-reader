@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/digisan/gotk/io"
 	util "github.com/nsip/otf-util"
 	"github.com/pkg/errors"
 	"github.com/radovskyb/watcher"
@@ -255,6 +256,11 @@ func Watcher(folder string, fileSuffix string, interval string, recursive bool, 
 				return errors.Wrap(osErr, "no watch folder specified, and cannot determine current working diectory")
 			}
 		}
+
+		// must create folder if it does not exist
+		// otherwise, panic
+		io.MustCreateDir(folder)
+
 		rdr.watchFolder = folder
 
 		// Get any of the paths to ignore.
